@@ -1,36 +1,36 @@
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import useMarvelService from "../../services/MarvelService";
-import Spinner from "../spinner/Spinner";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import ErrorMessage from "../errorMessage/ErrorMessage";
+import Spinner from "../spinner/Spinner";
+import { useEffect, useState } from "react";
+import useMarvelService from "../../services/MarvelService";
 
 import "./comicsList.scss";
 
 const ComicsList = () => {
   const [comicsList, setComicsList] = useState([]);
-  const [newItemLoading, setNewItemLoading] = useState(false);
+  const [newItemLoading, setnewItemLoading] = useState(false);
   const [offset, setOffset] = useState(0);
-  const [comicsEnded, setComicsEnded] = useState(false);
+  const [ComicsEnded, setComicsEnded] = useState(false);
 
-  const { loading, error, getAllComics } = useMarvelService();
+  const { loading, error, getAllcomics } = useMarvelService();
 
   useEffect(() => {
     onRequest(offset, true);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onRequest = (offset, initial) => {
-    initial ? setNewItemLoading(false) : setNewItemLoading(true);
-    getAllComics(offset).then(onComicsListLoaded);
+    initial ? setnewItemLoading(false) : setnewItemLoading(true);
+    getAllcomics(offset).then(onComicsListLoaded);
   };
 
   const onComicsListLoaded = (newComicsList) => {
     let ended = false;
-    if (newComicsList.length < 8) {
+    if (newComicsList.lenght < 8) {
       ended = true;
     }
     setComicsList([...comicsList, ...newComicsList]);
-    setNewItemLoading(false);
+
+    setnewItemLoading(false);
     setOffset(offset + 8);
     setComicsEnded(ended);
   };
@@ -51,11 +51,10 @@ const ComicsList = () => {
         </li>
       );
     });
-
     return <ul className="comics__grid">{items}</ul>;
   }
 
-  const items = renderItems(comicsList);
+  const items = renderItems(ComicsList);
 
   const errorMessage = error ? <ErrorMessage /> : null;
   const spinner = loading && !newItemLoading ? <Spinner /> : null;
@@ -67,7 +66,7 @@ const ComicsList = () => {
       {items}
       <button
         disabled={newItemLoading}
-        style={{ display: comicsEnded ? "none" : "block" }}
+        style={{ display: setComicsEnded ? "none" : "block" }}
         className="button button__main button__long"
         onClick={() => onRequest(offset)}
       >

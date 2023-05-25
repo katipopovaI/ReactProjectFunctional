@@ -1,5 +1,5 @@
 import ComicsList from "../comicsList/ComicsList";
-import AppBanner from "../appBanner/AppBanner";
+import AppBanner from "../appHeader/AppHeader";
 
 const ComicsPage = () => {
   return (
@@ -9,5 +9,4 @@ const ComicsPage = () => {
     </>
   );
 };
-
 export default ComicsPage;

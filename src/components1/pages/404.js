@@ -1,5 +1,6 @@
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import ErrorMessage from "../errorMessage/ErrorMessage";
-import { Link } from "react-router-dom";
+import { link } from "react-router-dom";
 
 const Page404 = () => {
   return (
@@ -19,7 +20,7 @@ const Page404 = () => {
         }}
         to="/"
       >
-        Back to main page
+        Back to main Page
       </Link>
     </div>
   );

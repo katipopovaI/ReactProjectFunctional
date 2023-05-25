@@ -1,9 +1,8 @@
 import { useState, useEffect, useRef } from "react";
-import PropTypes from "prop-types";
 
 import Spinner from "../spinner/Spinner";
-// import MarvelService from "../../services/MarvelService";
 import ErrorMessage from "../errorMessage/ErrorMessage";
+// import MarvelService from "../../services/MarvelService";
 import useMarvelService from "../../services/MarvelService";
 import "./charList.scss";
 
@@ -19,7 +18,6 @@ const CharList = (props) => {
 
   useEffect(() => {
     onRequest(offset, true);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onRequest = (offset, initial) => {
@@ -35,7 +33,7 @@ const CharList = (props) => {
   // };
 
   const onCharListLoaded = async (newCharList) => {
-    // const { logger, loggerSecond } = await import('./someFunc');
+    // const{logger,loggerSecond}=await import('./someFunc');
     // logger();
     // loggerSecond();
 
@@ -45,6 +43,7 @@ const CharList = (props) => {
     }
 
     setCharList((charList) => [...charList, ...newCharList]);
+    // setLoading((loading) => false);
     setNewItemLoading((newItemLoading) => false);
     setOffset((offset) => offset + 9);
     setCharEnded((charEnded) => ended);
@@ -103,20 +102,21 @@ const CharList = (props) => {
   const items = renderItems(charList);
 
   const errorMessage = error ? <ErrorMessage /> : null;
-  const spinner = loading && !newItemLoading ? <Spinner /> : null;
+  const spinner = loading ? <Spinner /> : null;
+  // const content = !(loading || error) ? items : null;
 
   // if (loading) {
-  //   import('./someFunc')
+  //   import("./someFunc")
   //     .then((obj) => obj.logger())
-  //     .catch();
+  //     .cath();
   // }
 
+  //default
   // if (loading) {
-  //   import('./someFunc')
+  //   import("./someFunc")
   //     .then((obj) => obj.default())
-  //     .catch();
+  //     .cath();
   // }
-
   return (
     <div className="char__list">
       {errorMessage}
@@ -132,10 +132,6 @@ const CharList = (props) => {
       </button>
     </div>
   );
-};
-
-CharList.propTypes = {
-  onCharSelected: PropTypes.func.isRequired,
 };
 
 export default CharList;

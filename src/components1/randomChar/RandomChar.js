@@ -18,13 +18,11 @@ const RandomChar = () => {
 
   useEffect(() => {
     updateChar();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     const timerId = setInterval(updateChar, 60000);
 
     return () => {
       clearInterval(timerId);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onCharLoaded = (char) => {
